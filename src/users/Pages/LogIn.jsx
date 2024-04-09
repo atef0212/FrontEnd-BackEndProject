@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function LogIn() {
   const [email, setEmail] = useState('');
@@ -34,11 +35,8 @@ function LogIn() {
 
   return (
     <>
-         <div className=" h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
-
-        {/* Username Input */}
+      <form onSubmit={handleLogin} className="max-w-md mx-auto">
+        {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
           <input
