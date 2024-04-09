@@ -1,5 +1,4 @@
-
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
@@ -9,17 +8,37 @@ const SignUp = () => {
   const [country, setCountry] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    // Handle signup logic here
-    const formData = { name, age, gender, country, email, password };
-    console.log('Signing up with:', formData);
-    // You can make an API call here to submit the form data
+    try {
+      const response = await fetch('http://localhost:4000/api/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      body: JSON.stringify({ name, gender, email, password })
+
+    
+      });
+
+      if (!response.ok) {
+        // If the response status is not OK, throw an error
+        throw new Error('Failed to sign up');
+      }
+
+      // If signup is successful, you can optionally redirect the user to a login page or show a success message
+      console.log('Signup successful');
+    } catch (error) {
+      console.error('Signup failed:', error);
+      setError('Failed to sign up. Please try again.');
+    }
   };
 
   return (
     <form onSubmit={handleSignup} className="max-w-md mx-auto">
+      {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
       <div className="mb-4">
         <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name</label>
         <input
@@ -36,7 +55,7 @@ const SignUp = () => {
         <label htmlFor="age" className="block text-gray-700 text-sm font-bold mb-2">Age</label>
         <input
           type="number"
-          id="age"
+          id="old"
           value={age}
           onChange={(e) => setAge(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -56,18 +75,21 @@ const SignUp = () => {
           required
         />
       </div>
-      <div className="mb-4">
+      
+      {/* <div className="mb-4">
         <label htmlFor="country" className="block text-gray-700 text-sm font-bold mb-2">Country</label>
         <input
           type="text"
-          id="country"
+          id="land"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Enter your country"
           required
         />
-      </div>
+      </div> */}
+      
+
       <div className="mb-4">
         <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
         <input
@@ -93,9 +115,8 @@ const SignUp = () => {
         />
       </div>
       <div className="flex items-center justify-between">
-      <button className=" bg-blue-500  text-white p-3 rounded focus:outline-none hover:bg-blue-600">
-      <Link to="/login">Login</Link> 
-          
+        <button className="bg-blue-500 text-white p-3 rounded focus:outline-none hover:bg-blue-600">
+          <Link to="/login">Login</Link>
         </button>
         <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
           Sign Up

@@ -1,60 +1,77 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function LogIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:4000/api/user/login', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!response.ok) {
+        // If the response status is not OK, throw an error
+        throw new Error('Failed to log in');
+      }
+
+      const data = await response.json();
+      console.log('Login successful:', data);
+      // Optionally, you can redirect the user to a new page or show a success message here
+    } catch (error) {
+      console.error('Login failed:', error);
+      setError('Invalid email or password');
+      // Optionally, you can clear the password field here
+      setPassword('');
+    }
+  }
+
   return (
     <>
-         <div className=" h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
-
-        {/* Username Input */}
+      <form onSubmit={handleLogin} className="max-w-md mx-auto">
+        {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
         <div className="mb-4">
-          <label
-            htmlFor="username"
-            className="block text-gray-600 text-sm font-medium mb-2"
-          >
-            Username
-          </label>
+          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
           <input
-            type="text"
-            id="username"
-            name="username"
-            value=""
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500"
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Enter your email"
+            required
           />
         </div>
-
-        {/* Password Input */}
         <div className="mb-6">
-          <label
-            htmlFor="password"
-            className="block text-gray-600 text-sm font-medium mb-2"
-          >
-            Password
-          </label>
+          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password</label>
           <input
             type="password"
             id="password"
-            name="password"
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Enter your password"
+            required
           />
         </div>
-
-        <div className="flex flex-row justify-center gap-2">
-      <button className=" bg-blue-500  text-white p-3 rounded focus:outline-none hover:bg-blue-600">
-          Login
-        </button>
-        <button className=" bg-blue-500 text-white p-3 rounded focus:outline-none hover:bg-blue-600">
-        <Link to="/signup">SignUp</Link>
-          
-        </button>
-
+        <div className="flex items-center justify-between">
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Log In
+          </button>
+          <button className="bg-blue-500 text-white p-3 rounded focus:outline-none hover:bg-blue-600">
+            <Link to="/signup">SignUp</Link>
+          </button>
         </div>
-  
-      </div>
-    </div>
+      </form>
     </>
-  )
+  );
 }
 
-export default LogIn
+export default LogIn;
