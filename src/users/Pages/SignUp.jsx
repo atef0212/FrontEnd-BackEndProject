@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [name, setName] = useState('');
-  const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
-  const [country, setCountry] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -51,7 +49,7 @@ const SignUp = () => {
           required
         />
       </div>
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label htmlFor="age" className="block text-gray-700 text-sm font-bold mb-2">Age</label>
         <input
           type="number"
@@ -62,7 +60,7 @@ const SignUp = () => {
           placeholder="Enter your age"
           required
         />
-      </div>
+      </div> */}
       <div className="mb-4">
         <label htmlFor="gender" className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
         <input

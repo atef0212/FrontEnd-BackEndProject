@@ -1,6 +1,13 @@
 import Pic from '../Imges/P1010299.png'
-function Mainpage() {
+function Mainpage({props}) {
 
+  const handleLogoutClick = async () => {
+    try {
+      await handleLogout();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
   return (
    <>
 
@@ -16,7 +23,7 @@ function Mainpage() {
 </div>
    
 </div>
-
+<button>{props.handleLogout}</button>
    </>
   )
 }
