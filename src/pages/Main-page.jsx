@@ -1,5 +1,5 @@
 import Pic from '../Imges/P1010299.png'
-function Mainpage({props}) {
+function Mainpage() {
 
   return (
    <>
@@ -16,7 +16,7 @@ function Mainpage({props}) {
 </div>
    
 </div>
-<button>{props.handleLogout}</button>
+
    </>
   )
 }
