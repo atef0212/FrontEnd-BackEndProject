@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+
 import { useState } from "react";
 
 function LogIn() {
@@ -6,6 +7,8 @@ function LogIn() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -23,8 +26,10 @@ function LogIn() {
       }
 
       const data = await response.json();
+
       console.log('Login successful:', data);
       // Optionally, you can redirect the user to a new page or show a success message here
+      navigate("/mainPage")
     } catch (error) {
       console.error('Login failed:', error);
       setError('Invalid email or password');

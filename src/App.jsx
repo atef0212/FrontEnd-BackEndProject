@@ -4,7 +4,6 @@ import './App.css'
 import LogIn from './users/Pages/LogIn'
 import LayoutA from './LayoutA'
 import SignUp from './users/Pages/SignUp'
-import Auth from './pages/Auth'
 import Mainpage from './pages/Main-page'
 function App() {
 const router=createBrowserRouter(createRoutesFromElements(
