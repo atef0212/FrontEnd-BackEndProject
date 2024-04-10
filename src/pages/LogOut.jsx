@@ -1,6 +1,6 @@
-import Mainpage from "./Main-page";
+import { useNavigate} from "react-router-dom";
 function LogOut() {
-
+const navigate=useNavigate()
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
@@ -12,9 +12,7 @@ function LogOut() {
       });
       
       if (response.ok) {
-        // Clear local storage or cookies here if needed
-        window.localStorage.clear(); // Example: clear local storage
-        window.location.reload(); // Refresh the page or redirect to login
+        navigate("/login")
       } else {
         console.error('Logout failed:', response.statusText);
       }
@@ -25,8 +23,7 @@ function LogOut() {
 
   return (
    <>
- <button onClick={handleLogout}>Logout</button>
-<Mainpage logOut-btn={handleLogout}/>
+ <button className="relative left-96"  onClick={handleLogout}>Logout</button>
 
    </>
   )
