@@ -14,6 +14,7 @@ function LogIn() {
     try {
       const response = await fetch('http://localhost:4000/api/user/login', {
         method: "POST",
+        credentials:"include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -26,10 +27,10 @@ function LogIn() {
       }
 
       const data = await response.json();
-
-      console.log('Login successful:', data);
       // Optionally, you can redirect the user to a new page or show a success message here
       navigate("/mainPage")
+   
+      return data.token;
     } catch (error) {
       console.error('Login failed:', error);
       setError('Invalid email or password');

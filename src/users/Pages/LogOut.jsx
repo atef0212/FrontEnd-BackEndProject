@@ -6,12 +6,14 @@ const navigate=useNavigate()
     try {
       const response = await  fetch('http://localhost:4000/api/user/logout', {
         method: 'POST',
+        credentials:"include",
         headers: {
           'Content-Type': 'application/json'
         }
       });
       
       if (response.ok) {
+       
         navigate("/login")
       } else {
         console.error('Logout failed:', response.statusText);

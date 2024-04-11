@@ -1,5 +1,5 @@
 import Pic from "../Imges/P1010299.png";
-import LogOut from "./LogOut";
+import LogOut from "../users/Pages/LogOut";
 function Mainpage() {
   return (
     <>
