@@ -7,6 +7,9 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [age, setAge] = useState('');
+  const [land, setLand] = useState('');
+  const [tall, setTall] = useState('');
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -16,7 +19,7 @@ const SignUp = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-      body: JSON.stringify({ name, gender, email, password })
+      body: JSON.stringify({ name, gender, email, password,age, land, tall })
 
     
       });
@@ -48,7 +51,7 @@ const SignUp = () => {
           required
         />
       </div>
-      {/* <div className="mb-4">
+    <div className="mb-4">
         <label htmlFor="age" className="block text-gray-700 text-sm font-bold mb-2">Age</label>
         <input
           type="number"
@@ -59,7 +62,7 @@ const SignUp = () => {
           placeholder="Enter your age"
           required
         />
-      </div> */}
+      </div> 
       <div className="mb-4">
         <label htmlFor="gender" className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
         <input
@@ -73,13 +76,13 @@ const SignUp = () => {
         />
       </div>
       
-      {/* <div className="mb-4">
+       <div className="mb-4">
         <label htmlFor="country" className="block text-gray-700 text-sm font-bold mb-2">Country</label>
         <input
           type="text"
           id="land"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
+          value={land}
+          onChange={(e) => setLand(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Enter your country"
           required
@@ -106,6 +109,18 @@ const SignUp = () => {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+      <div className="mb-6">
+        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Tall</label>
+        <input
+          type="number"
+          id="tall"
+          value={tall}
+          onChange={(e) => setTall(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Enter your password"
           required
