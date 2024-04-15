@@ -1,7 +1,13 @@
 import { useNavigate} from "react-router-dom";
+
+
+
 function LogOut() {
+
+
 const navigate=useNavigate()
   const handleLogout = async (e) => {
+   
     e.preventDefault();
     try {
       const response = await  fetch('http://localhost:4000/api/user/logout', {
@@ -13,8 +19,8 @@ const navigate=useNavigate()
       });
       
       if (response.ok) {
-       
-        navigate("/login")
+
+        navigate("/login",{replace:true})
       } else {
         console.error('Logout failed:', response.statusText);
       }
