@@ -1,13 +1,14 @@
 import { Link, useNavigate} from "react-router-dom";
-
 import { useState } from "react";
+//import {useDaContext} from "../../pages/useContext";
+//import { useContext, useState } from "react";
 
 function LogIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-
+//const auth=useContext(useDaContext)
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,10 +26,10 @@ function LogIn() {
         // If the response status is not OK, throw an error
         throw new Error('Failed to log in');
       }
-
+      
       const data = await response.json();
       // Optionally, you can redirect the user to a new page or show a success message here
-      navigate("/mainPage")
+      navigate("/mainPage", {replace:true})
    
       return data.token;
     } catch (error) {
