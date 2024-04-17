@@ -1,9 +1,11 @@
 import { Link, useNavigate} from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Context/useCon";
 //import {useDaContext} from "../../pages/useContext";
 //import { useContext, useState } from "react";
 
 function LogIn() {
+  const auth=useContext(AuthContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -29,9 +31,14 @@ function LogIn() {
       
       const data = await response.json();
       // Optionally, you can redirect the user to a new page or show a success message here
+     // auth.setId(data.user._id)
+      const userData=data.user
+      auth.setData(userData)
+
+
       navigate("/mainPage", {replace:true})
-   
-      return data.token;
+      
+
     } catch (error) {
       console.error('Login failed:', error);
       setError('Invalid email or password');

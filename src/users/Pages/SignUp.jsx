@@ -1,7 +1,10 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/useCon';
 const SignUp = () => {
+  const nav=useNavigate()
+  const autUser=useContext(AuthContext)
+
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
   const [email, setEmail] = useState('');
@@ -23,15 +26,16 @@ const SignUp = () => {
 
     
       });
+  
+     
+ const data = await response.json();
+ autUser.setAuth(data.newUser)
+ alert(data.msg)
+nav("/login")
 
-      if (!response.ok) {
-        // If the response status is not OK, throw an error
-        throw new Error('Failed to sign up');
-      }
-      const data = await response.json();
-      return data.token;
+console.log(data)
     } catch (error) {
-      console.error('Signup failed:', error);
+      console.log('Signup failed:', error);
       setError('Failed to sign up. Please try again.');
     }
   };
@@ -63,6 +67,22 @@ const SignUp = () => {
           required
         />
       </div> 
+
+
+      <div className="mb-6">
+        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Tall</label>
+        <input
+          type="number"
+          id="tall"
+          value={tall}
+          onChange={(e) => setTall(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+
+      
       <div className="mb-4">
         <label htmlFor="gender" className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
         <input
@@ -114,18 +134,7 @@ const SignUp = () => {
           required
         />
       </div>
-      <div className="mb-6">
-        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Tall</label>
-        <input
-          type="number"
-          id="tall"
-          value={tall}
-          onChange={(e) => setTall(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          placeholder="Enter your password"
-          required
-        />
-      </div>
+ 
       <div className="flex items-center justify-between">
         <button className="bg-blue-500 text-white p-3 rounded focus:outline-none hover:bg-blue-600">
           <Link to="/login">Login</Link>
