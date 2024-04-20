@@ -14,6 +14,8 @@ const SignUp = () => {
   const [land, setLand] = useState('');
   const [tall, setTall] = useState('');
 
+
+
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
@@ -40,6 +42,8 @@ console.log(data)
     }
   };
 
+
+  
   return (
     <form onSubmit={handleSignup} className="max-w-md mx-auto">
       {error && <div className="text-red-500 text-sm mb-4">{error}</div>}

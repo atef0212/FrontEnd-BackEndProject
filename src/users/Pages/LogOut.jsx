@@ -31,7 +31,7 @@ const navigate=useNavigate()
 
   return (
    <>
- <button className="relative left-96 bg-black text-white w-20 hover:text-blue-600"  onClick={handleLogout}>Logout</button>
+ <button className="relative left-[1%] bg-black text-white w-20 hover:text-blue-600"  onClick={handleLogout}>Logout</button>
 
    </>
   )

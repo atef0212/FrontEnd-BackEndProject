@@ -41,7 +41,8 @@ function Mainpage() {
 
 </main>
     }
-    <nav>     <ul><li ><LogOut  /></li></ul> </nav>
+    <nav>     <ul><li ><LogOut  /></li>
+    </ul> </nav>
    
     </>
   );
